@@ -2,6 +2,8 @@ package com.growby.library.backend.exception;
 
 import com.growby.library.backend.model.dto.error.ErrorDto;
 import com.growby.library.backend.model.dto.error.ErrorResponseDto;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.List;
 
+import static com.growby.library.backend.common.ValidationConstants.*;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -27,6 +31,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   @NonNull final WebRequest request) {
 
         return this.retrieveBadRequest(ex.getBindingResult().getFieldErrors());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
+                                                                        WebRequest request) {
+        return new ResponseEntity<>(DATA_INTEGRITY_VIOLATION_EXCEPTION_MESSAGE, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BookNotFoundException.class)
@@ -49,7 +59,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponseDto response = new ErrorResponseDto(
                 HttpStatus.BAD_REQUEST.value(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
-                "Validation failed",
+                VALIDATION_FIELD,
                 errors
         );
 
@@ -60,7 +70,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private FieldError buildFieldError(final String fieldName,
                                        final String rejectedValue,
                                        final String message) {
-        return new FieldError("", fieldName, rejectedValue, true,
+        return new FieldError(StringUtils.EMPTY, fieldName, rejectedValue, true,
                 null, null, message);
     }
 }

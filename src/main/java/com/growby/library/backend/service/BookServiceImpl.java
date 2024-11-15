@@ -2,11 +2,13 @@ package com.growby.library.backend.service;
 
 import com.growby.library.backend.common.ValidationConstants;
 import com.growby.library.backend.exception.BookNotFoundException;
+import com.growby.library.backend.exception.InvalidFieldException;
 import com.growby.library.backend.mapper.BookEntityMapper;
 import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.repository.BookRepository;
+import jakarta.xml.bind.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -44,6 +46,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponseDto createBook(BookRequestDto bookRequestDto) {
+        if(bookRepository.existsByIsbn(bookRequestDto.getIsbn())){
+            throw new InvalidFieldException(HttpStatus.BAD_REQUEST, "isbn", bookRequestDto.getIsbn(),
+                    ValidationConstants.BOOK_ISBN_EXISTS_MESSAGE);
+        }
+
         Book book = this.bookEntityMapper.fromBookRequestDto(bookRequestDto);
         book = this.bookRepository.save(book);
         return this.bookEntityMapper.toBookResponseDto(book);

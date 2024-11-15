@@ -54,6 +54,10 @@ public class BookRepositoryImpl implements BookRepository {
     public Optional<Book> findById(Long id) {
         return this.bookJpaRepository.findById(id);
     }
+    @Override
+    public boolean existsByIsbn(String isbn) {
+        return this.bookJpaRepository.existsByIsbn(isbn);
+    }
 
     @Override
     public Book save(Book book) {
