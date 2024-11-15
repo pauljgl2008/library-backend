@@ -1,6 +1,7 @@
 package com.growby.library.backend.model.dto.book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.growby.library.backend.model.entity.Author;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -18,11 +19,11 @@ public class BookRequestDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Long id;
 
     private String title;
 
-    private String author;
+    private Author author;
 
     @NotBlank(message = BOOK_ISBN_REQUIRED_MESSAGE)
     private String isbn;

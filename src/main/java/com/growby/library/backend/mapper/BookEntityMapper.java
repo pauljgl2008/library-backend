@@ -2,9 +2,11 @@ package com.growby.library.backend.mapper;
 
 import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
+import com.growby.library.backend.model.entity.Author;
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.model.entity.BookStatus;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 

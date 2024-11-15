@@ -1,6 +1,8 @@
 package com.growby.library.backend.model.dto.book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.growby.library.backend.model.dto.author.AuthorResponseDto;
+import com.growby.library.backend.model.entity.Author;
 import lombok.Data;
 
 import java.io.Serial;
@@ -19,7 +21,7 @@ public class BookResponseDto implements Serializable {
 
     private String title;
 
-    private String author;
+    private Author author;
 
     private String isbn;
 

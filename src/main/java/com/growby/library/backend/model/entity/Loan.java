@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,9 +18,9 @@ public class Loan {
 
     private LocalDate returnDate;
 
-    @Enumerated(EnumType.STRING)
-    private LoanStatus status;
+    private String status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BOOK_ID")
     private Book book;
 }

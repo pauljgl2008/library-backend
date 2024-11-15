@@ -8,7 +8,6 @@ import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.repository.BookRepository;
-import jakarta.xml.bind.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -46,7 +45,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponseDto createBook(BookRequestDto bookRequestDto) {
-        if(bookRepository.existsByIsbn(bookRequestDto.getIsbn())){
+        if (bookRepository.existsByIsbn(bookRequestDto.getIsbn())) {
             throw new InvalidFieldException(HttpStatus.BAD_REQUEST, "isbn", bookRequestDto.getIsbn(),
                     ValidationConstants.BOOK_ISBN_EXISTS_MESSAGE);
         }
@@ -64,6 +63,7 @@ public class BookServiceImpl implements BookService {
 
         book.setTitle(bookRequestDto.getTitle());
         book.setIsbn(bookRequestDto.getIsbn());
+        book.setAuthor(bookRequestDto.getAuthor());
         book.setPublicationDate(bookRequestDto.getPublicationDate());
         book.setStatus(bookRequestDto.getStatus());
 
@@ -78,7 +78,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(Long id) {
+    public void deleteBookById(Long id) {
         this.bookRepository.deleteById(id);
     }
 }

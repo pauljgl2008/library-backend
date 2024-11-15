@@ -19,6 +19,6 @@ public interface BookService {
 
     boolean isBookAvailable(Long bookId);
 
-    void deleteBook(Long id);
+    void deleteBookById(Long id);
 }
 
