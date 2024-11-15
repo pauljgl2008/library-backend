@@ -7,6 +7,7 @@ import com.growby.library.backend.mapper.BookEntityMapper;
 import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
 import com.growby.library.backend.model.entity.Book;
+import com.growby.library.backend.repository.AuthorRepository;
 import com.growby.library.backend.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
     private final BookEntityMapper bookEntityMapper;
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
     @Override
     public boolean isBookAvailable(Long id) {
@@ -63,7 +65,9 @@ public class BookServiceImpl implements BookService {
 
         book.setTitle(bookRequestDto.getTitle());
         book.setIsbn(bookRequestDto.getIsbn());
-        book.setAuthor(bookRequestDto.getAuthor());
+        book.setAuthor(this.authorRepository.findById(bookRequestDto.getId())
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "id", id.toString(),
+                ValidationConstants.BOOK_NOT_FOUND_MESSAGE)));
         book.setPublicationDate(bookRequestDto.getPublicationDate());
         book.setStatus(bookRequestDto.getStatus());
 

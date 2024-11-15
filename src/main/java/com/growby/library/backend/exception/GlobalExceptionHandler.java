@@ -40,7 +40,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(BookNotFoundException.class)
-    public final ResponseEntity<Object> handleBookNotFoundException(final InvalidFieldException ex) {
+    public final ResponseEntity<Object> handleBookNotFoundException(final BookNotFoundException ex) {
         return this.retrieveBadRequest(
                 List.of(this.buildFieldError(ex.getFieldName(), ex.getRejectedValue(), ex.getMessage())));
     }
