@@ -2,7 +2,6 @@ package com.growby.library.backend.service;
 
 import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
-import com.growby.library.backend.model.entity.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

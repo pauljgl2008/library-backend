@@ -6,14 +6,11 @@ import com.growby.library.backend.mapper.BookEntityMapper;
 import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
 import com.growby.library.backend.model.entity.Book;
-import com.growby.library.backend.model.entity.LoanStatus;
 import com.growby.library.backend.repository.BookRepository;
-import com.growby.library.backend.repository.LoanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -29,7 +26,6 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
     private final BookEntityMapper bookEntityMapper;
     private final BookRepository bookRepository;
-    private final LoanRepository loanRepository;
 
     @Override
     public boolean isBookAvailable(Long id) {
@@ -38,13 +34,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Page<BookResponseDto> getBooksWithPagination(Pageable pageable, String title, String author) {
-        // Obtener la página de libros desde el repositorio
         Page<Book> bookPage = bookRepository.findAllWithPagination(pageable, title, author);
 
-        // Mapear la lista de libros a DTOs
         List<BookResponseDto> bookResponseDtos = bookEntityMapper.bookListToBookResponseDtoList(bookPage.getContent());
 
-        // Retornar la página de BookResponseDto, preservando la información de paginación
         return new PageImpl<>(bookResponseDtos, pageable, bookPage.getTotalElements());
     }
 
@@ -74,7 +67,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<BookResponseDto> getBookById(Long bookId) {
         Optional<Book> book = bookRepository.findById(bookId);
-        // Si el libro está presente, lo mapeamos a un DTO y lo devolvemos
         return book.map(this.bookEntityMapper::toBookResponseDto);
     }
 

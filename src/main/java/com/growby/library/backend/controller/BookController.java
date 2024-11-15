@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.growby.library.backend.common.ValidationConstants.BOOK_STATUS_AVAILABLE_MESSAGE;
+import static com.growby.library.backend.common.ValidationConstants.BOOK_STATUS_NOT_AVAILABLE_MESSAGE;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/books")
@@ -36,9 +39,9 @@ public class BookController {
     public ResponseEntity<String> checkBookAvailability(@PathVariable Long id) {
         boolean isAvailable = bookService.isBookAvailable(id);
         if (isAvailable) {
-            return ResponseEntity.ok("El libro está disponible.");
+            return ResponseEntity.ok(BOOK_STATUS_AVAILABLE_MESSAGE);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El libro no está disponible.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(BOOK_STATUS_NOT_AVAILABLE_MESSAGE);
         }
     }
 

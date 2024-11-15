@@ -53,14 +53,13 @@ public class BookCriteriaBuilder {
         }
 
         // Add sorting if present in the Pageable object
-        if (pageable.getSort() != null) {
-            for (Sort.Order order : pageable.getSort()) {
-                String property = order.getProperty();
-                boolean ascending = order.getDirection().isAscending();
-                criteriaQuery.orderBy(ascending
-                        ? criteriaBuilder.asc(root.get(property))
-                        : criteriaBuilder.desc(root.get(property)));
-            }
+        pageable.getSort();
+        for (Sort.Order order : pageable.getSort()) {
+            String property = order.getProperty();
+            boolean ascending = order.getDirection().isAscending();
+            criteriaQuery.orderBy(ascending
+                    ? criteriaBuilder.asc(root.get(property))
+                    : criteriaBuilder.desc(root.get(property)));
         }
 
         return criteriaQuery;
