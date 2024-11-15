@@ -14,8 +14,8 @@ import static com.growby.library.backend.common.ValidationConstants.INVALID_BOOK
 @AllArgsConstructor
 @Getter
 public enum BookStatus {
-    AVAILABLE("Available"),
-    NOT_AVAILABLE("Not available");
+    AVAILABLE("Disponible"),
+    NOT_AVAILABLE("No disponible");
 
     private static final Map<String, BookStatus> statusMap = new HashMap<>();
 

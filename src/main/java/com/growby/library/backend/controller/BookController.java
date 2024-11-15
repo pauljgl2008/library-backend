@@ -25,7 +25,7 @@ public class BookController {
     public ResponseEntity<Page<BookResponseDto>> getBooksWithPagination(Pageable pageable,
                                                                         @RequestParam(required = false) String title,
                                                                         @RequestParam(required = false) String author) {
-        Page<BookResponseDto> books = bookService.getBooksWithPagination(pageable, title, author);
+        Page<BookResponseDto> books = this.bookService.getBooksWithPagination(pageable, title, author);
         return ResponseEntity.ok(books);
     }
 
@@ -37,7 +37,7 @@ public class BookController {
 
     @GetMapping("/{id}/availability")
     public ResponseEntity<String> checkBookAvailability(@PathVariable Long id) {
-        boolean isAvailable = bookService.isBookAvailable(id);
+        boolean isAvailable = this.bookService.isBookAvailable(id);
         if (isAvailable) {
             return ResponseEntity.ok(BOOK_STATUS_AVAILABLE_MESSAGE);
         } else {
@@ -47,7 +47,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BookResponseDto> getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id).map(ResponseEntity::ok)
+        return this.bookService.getBookById(id).map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 

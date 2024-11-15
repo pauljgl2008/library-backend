@@ -17,7 +17,10 @@ public class BookStatusException extends RuntimeException {
 
     private final String rejectedValue;
 
-    public BookStatusException(final HttpStatusCode statusCode, final String fieldName, final String rejectedValue, final String message) {
+    public BookStatusException(final HttpStatusCode statusCode,
+                               final String fieldName,
+                               final String rejectedValue,
+                               final String message) {
         super(message);
         this.fieldName = fieldName;
         this.rejectedValue = rejectedValue;

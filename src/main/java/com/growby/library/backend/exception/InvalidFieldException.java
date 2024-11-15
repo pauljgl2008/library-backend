@@ -18,7 +18,10 @@ public class InvalidFieldException extends RuntimeException {
     private final String rejectedValue;
 
 
-    public InvalidFieldException(final HttpStatusCode statusCode, final String fieldName, final String rejectedValue, final String message) {
+    public InvalidFieldException(final HttpStatusCode statusCode,
+                                 final String fieldName,
+                                 final String rejectedValue,
+                                 final String message) {
         super(message);
         this.fieldName = fieldName;
         this.rejectedValue = rejectedValue;

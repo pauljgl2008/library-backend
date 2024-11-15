@@ -18,7 +18,7 @@ public class Loan {
     private LocalDate returnDate;
 
     @Enumerated(EnumType.STRING)
-    private LoanStatus status;//(Active / Completed)
+    private LoanStatus status;
 
     @ManyToOne
     private Book book;

@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
     public BookResponseDto updateBook(Long id, BookRequestDto bookRequestDto) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "id", id.toString(),
-                        ValidationConstants.BOOK_NOT_EXISTS_MESSAGE));
+                        ValidationConstants.BOOK_NOT_FOUND_MESSAGE));
 
         book.setTitle(bookRequestDto.getTitle());
         book.setIsbn(bookRequestDto.getIsbn());

@@ -1,6 +1,5 @@
 package com.growby.library.backend.exception;
 
-
 import com.growby.library.backend.model.dto.error.ErrorDto;
 import com.growby.library.backend.model.dto.error.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
@@ -24,19 +23,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
                                                                   @NonNull final HttpHeaders headers,
-                                                                  @NonNull final HttpStatusCode status, @NonNull final WebRequest request) {
+                                                                  @NonNull final HttpStatusCode status,
+                                                                  @NonNull final WebRequest request) {
 
         return this.retrieveBadRequest(ex.getBindingResult().getFieldErrors());
     }
 
     @ExceptionHandler(BookNotFoundException.class)
     public final ResponseEntity<Object> handleBookNotFoundException(final InvalidFieldException ex) {
-        return this.retrieveBadRequest(List.of(this.buildFieldError(ex.getFieldName(), ex.getRejectedValue(), ex.getMessage())));
+        return this.retrieveBadRequest(
+                List.of(this.buildFieldError(ex.getFieldName(), ex.getRejectedValue(), ex.getMessage())));
     }
 
     @ExceptionHandler(InvalidFieldException.class)
     public final ResponseEntity<Object> serviceExceptionHandler(final InvalidFieldException ex) {
-        return this.retrieveBadRequest(List.of(this.buildFieldError(ex.getFieldName(), ex.getRejectedValue(), ex.getMessage())));
+        return this.retrieveBadRequest(
+                List.of(this.buildFieldError(ex.getFieldName(), ex.getRejectedValue(), ex.getMessage())));
     }
 
     private ResponseEntity<Object> retrieveBadRequest(List<FieldError> fieldErrors) {
@@ -55,7 +57,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    private FieldError buildFieldError(final String fieldName, final String rejectedValue, final String message) {
+    private FieldError buildFieldError(final String fieldName,
+                                       final String rejectedValue,
+                                       final String message) {
         return new FieldError("", fieldName, rejectedValue, true,
                 null, null, message);
     }

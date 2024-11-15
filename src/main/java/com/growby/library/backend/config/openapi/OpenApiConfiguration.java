@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfiguration {
 
     @Bean
-    public OpenAPI usersOpenAPI() {
+    public OpenAPI libraryOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("API Library - GrowBy")
                         .description("API RESTful of Library")

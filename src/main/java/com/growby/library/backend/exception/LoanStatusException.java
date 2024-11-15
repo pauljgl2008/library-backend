@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatusCode;
 import java.io.Serial;
 
 @Getter
-public class BookNotFoundException extends RuntimeException {
+public class LoanStatusException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = 39348712723127893L;
@@ -17,14 +17,14 @@ public class BookNotFoundException extends RuntimeException {
 
     private final String rejectedValue;
 
-
-    public BookNotFoundException(final HttpStatusCode statusCode,
-                                 final String fieldName,
-                                 final String rejectedValue,
-                                 final String message) {
+    public LoanStatusException(final HttpStatusCode statusCode,
+                               final String fieldName,
+                               final String rejectedValue,
+                               final String message) {
         super(message);
         this.fieldName = fieldName;
         this.rejectedValue = rejectedValue;
         this.statusCode = statusCode;
     }
+
 }
