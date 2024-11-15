@@ -12,12 +12,15 @@ import com.growby.library.backend.repository.LoanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -29,16 +32,22 @@ public class BookServiceImpl implements BookService {
     private final LoanRepository loanRepository;
 
     @Override
-    public List<BookResponseDto> getBooks() {
-        List<Book> books = this.bookRepository.findAll();
-        return this.bookEntityMapper.bookListToBookResponseDtoList(books);
+    public boolean isBookAvailable(Long id) {
+        return bookRepository.isBookAvailable(id);
     }
 
     @Override
-    public List<BookResponseDto> getBooksWithPagination(int page, int size) {
-        Page<Book> booksPage = bookRepository.findAll(PageRequest.of(page, size));
-        return this.bookEntityMapper.bookListToBookResponseDtoList(booksPage.getContent());
+    public Page<BookResponseDto> getBooksWithPagination(Pageable pageable, String title, String author) {
+        // Obtener la página de libros desde el repositorio
+        Page<Book> bookPage = bookRepository.findAllWithPagination(pageable, title, author);
+
+        // Mapear la lista de libros a DTOs
+        List<BookResponseDto> bookResponseDtos = bookEntityMapper.bookListToBookResponseDtoList(bookPage.getContent());
+
+        // Retornar la página de BookResponseDto, preservando la información de paginación
+        return new PageImpl<>(bookResponseDtos, pageable, bookPage.getTotalElements());
     }
+
 
     @Override
     public BookResponseDto createBook(BookRequestDto bookRequestDto) {
@@ -63,25 +72,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean isBookAvailable(Long bookId) {
-        // Obtener el libro, o lanzar una excepción si no existe
-        Book book = this.bookRepository.findById(bookId)
-                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "id", bookId.toString(),
-                        ValidationConstants.BOOK_NOT_EXISTS_MESSAGE));
-
-        // Verificar si el libro tiene préstamos activos
-        long activeLoansCount = this.loanRepository.countByBookAndStatus(book, LoanStatus.ACTIVE);
-
-        // Si tiene préstamos activos, no está disponible
-        return activeLoansCount == 0;
+    public Optional<BookResponseDto> getBookById(Long bookId) {
+        Optional<Book> book = bookRepository.findById(bookId);
+        // Si el libro está presente, lo mapeamos a un DTO y lo devolvemos
+        return book.map(this.bookEntityMapper::toBookResponseDto);
     }
 
     @Override
     public void deleteBook(Long id) {
-        if (!bookRepository.existsById(id)) {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "id", id.toString(),
-                    ValidationConstants.BOOK_NOT_EXISTS_MESSAGE);
-        }
         this.bookRepository.deleteById(id);
     }
 }

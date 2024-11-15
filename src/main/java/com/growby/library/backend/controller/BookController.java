@@ -5,11 +5,11 @@ import com.growby.library.backend.model.dto.book.BookResponseDto;
 import com.growby.library.backend.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,8 +19,10 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<List<BookResponseDto>> getBooks() {
-        List<BookResponseDto> books = this.bookService.getBooks();
+    public ResponseEntity<Page<BookResponseDto>> getBooksWithPagination(Pageable pageable,
+                                                                        @RequestParam(required = false) String title,
+                                                                        @RequestParam(required = false) String author) {
+        Page<BookResponseDto> books = bookService.getBooksWithPagination(pageable, title, author);
         return ResponseEntity.ok(books);
     }
 
@@ -31,9 +33,19 @@ public class BookController {
     }
 
     @GetMapping("/{id}/availability")
-    public ResponseEntity<Boolean> checkBookAvailability(@PathVariable Long id) {
-        boolean isAvailable = this.bookService.isBookAvailable(id);
-        return ResponseEntity.ok(isAvailable);
+    public ResponseEntity<String> checkBookAvailability(@PathVariable Long id) {
+        boolean isAvailable = bookService.isBookAvailable(id);
+        if (isAvailable) {
+            return ResponseEntity.ok("El libro está disponible.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El libro no está disponible.");
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BookResponseDto> getBookById(@PathVariable Long id) {
+        return bookService.getBookById(id).map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
     @PutMapping("/{id}")
