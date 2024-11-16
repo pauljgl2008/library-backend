@@ -20,7 +20,7 @@ public class ValidationConstants {
     public static final String BOOK_ISBN_EXISTS_MESSAGE = "El isbn del libro ya existe.";
 
     public static final String DATA_INTEGRITY_VIOLATION_EXCEPTION_MESSAGE = "Error de integridad en los datos. Verifica los valores enviados.";
-    public static final String GENERIC_EXCEPTION_MESSAGE = "Se ha producido un error inesperado en el servidor.";
+    public static final String ORDER_EXCEPTION_MESSAGE = "Los campos de ordenamiento solo pueden ser 'id', 'title', 'author', 'isbn', 'status' y 'publication_date'.";
 
     public static final String LOAN_STATUS_FIELD = "estado del préstamo";
     public static final String INVALID_LOAN_STATUS_MESSAGE = "El estado del préstamo solo puede ser 'Activo' o 'Finalizado'.";
