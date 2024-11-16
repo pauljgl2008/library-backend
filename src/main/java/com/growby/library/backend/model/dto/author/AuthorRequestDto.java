@@ -1,5 +1,6 @@
 package com.growby.library.backend.model.dto.author;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class AuthorRequestDto {
 
     private String nationality;
 
+    @JsonProperty("birth_date")
     private LocalDate birthDate;
 }
 

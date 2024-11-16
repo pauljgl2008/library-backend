@@ -1,15 +1,16 @@
 package com.growby.library.backend.repository;
 
-import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.model.entity.Loan;
-import com.growby.library.backend.model.entity.LoanStatus;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface LoanRepository extends JpaRepository<Loan, Long> {
-    List<Loan> findByBook(Book book);
+public interface LoanRepository {
+    List<Loan> findAll();
 
-    long countByBookAndStatus(Book book, LoanStatus status);
+    Optional<Loan> findById(final Long id);
 
+    Loan save(final Loan book);
+
+    void deleteById(final Long id);
 }

@@ -18,10 +18,10 @@ public interface BookEntityMapper {
     BookEntityMapper INSTANCE = Mappers.getMapper(BookEntityMapper.class);
 
     List<BookResponseDto> bookListToBookResponseDtoList(List<Book> source);
-    @Mapping(source = "author.name", target = "author") // Map Long author.id to Author object
+    @Mapping(source = "author.name", target = "author")
     BookResponseDto toBookResponseDto(Book source);
 
-    @Mapping(source = "author", target = "author.id") // Map Author object to Long author.id
+    @Mapping(source = "author", target = "author.id")
     Book fromBookRequestDto(BookRequestDto source);
 
     default BookStatus toBookStatusEnum(String status) {

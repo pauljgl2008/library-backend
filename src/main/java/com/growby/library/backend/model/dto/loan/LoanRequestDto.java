@@ -1,7 +1,6 @@
 package com.growby.library.backend.model.dto.loan;
 
-import com.growby.library.backend.model.entity.Book;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -11,12 +10,14 @@ public class LoanRequestDto {
 
     private Long id;
 
+    @JsonProperty("loan_date")
     private LocalDate loanDate;
 
+    @JsonProperty("return_date")
     private LocalDate returnDate;
 
     private String status;
 
-    @ManyToOne
-    private Book book;
+    @JsonProperty("book_id")
+    private String bookId;
 }

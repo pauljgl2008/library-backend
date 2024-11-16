@@ -1,7 +1,10 @@
-package com.growby.library.backend.repository;
+package com.growby.library.backend.repository.impl;
 
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.model.entity.BookStatus;
+import com.growby.library.backend.repository.BookCriteriaBuilder;
+import com.growby.library.backend.repository.BookJpaRepository;
+import com.growby.library.backend.repository.BookRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -54,6 +57,7 @@ public class BookRepositoryImpl implements BookRepository {
     public Optional<Book> findById(Long id) {
         return this.bookJpaRepository.findById(id);
     }
+
     @Override
     public boolean existsByIsbn(String isbn) {
         return this.bookJpaRepository.existsByIsbn(isbn);
