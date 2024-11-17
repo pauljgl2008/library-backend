@@ -13,4 +13,6 @@ public interface LoanRepository {
     Loan save(final Loan book);
 
     void deleteById(final Long id);
+
+    boolean isLoanExistsAndCompleted(Long id, String status);
 }

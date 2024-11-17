@@ -2,7 +2,6 @@ package com.growby.library.backend.mapper;
 
 import com.growby.library.backend.model.dto.book.BookRequestDto;
 import com.growby.library.backend.model.dto.book.BookResponseDto;
-import com.growby.library.backend.model.entity.Author;
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.model.entity.BookStatus;
 import org.mapstruct.Mapper;
@@ -18,6 +17,7 @@ public interface BookEntityMapper {
     BookEntityMapper INSTANCE = Mappers.getMapper(BookEntityMapper.class);
 
     List<BookResponseDto> bookListToBookResponseDtoList(List<Book> source);
+
     @Mapping(source = "author.name", target = "author")
     BookResponseDto toBookResponseDto(Book source);
 

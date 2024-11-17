@@ -33,4 +33,9 @@ public class LoanRepositoryImpl implements LoanRepository {
     public void deleteById(Long id) {
         this.loanJpaRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isLoanExistsAndCompleted(Long id, String status) {
+        return loanJpaRepository.existsByIdAndCompleted(id, status);
+    }
 }

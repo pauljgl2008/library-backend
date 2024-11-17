@@ -8,9 +8,11 @@ import java.util.Optional;
 
 public interface AuthorService {
 
+    boolean isAuthorExists(Long id);
+
     Optional<AuthorResponseDto> getAuthorById(Long bookId);
 
-    List<AuthorResponseDto> getAuthors();
+    List<AuthorResponseDto> getAllAuthors();
 
     AuthorResponseDto createAuthor(AuthorRequestDto authorRequestDto);
 

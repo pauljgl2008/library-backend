@@ -27,9 +27,13 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorEntityMapper authorEntityMapper;
     private final AuthorRepositoryImpl authorRepository;
 
+    @Override
+    public boolean isAuthorExists(Long id) {
+        return this.authorRepository.isAuthorExists(id);
+    }
 
     @Override
-    public List<AuthorResponseDto> getAuthors() {
+    public List<AuthorResponseDto> getAllAuthors() {
         List<Author> authors = this.authorRepository.findAll();
         return this.authorEntityMapper.authorListToAuthorResponseDtoList(authors);
     }

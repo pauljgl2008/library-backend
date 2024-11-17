@@ -15,6 +15,11 @@ public class AuthorRepositoryImpl implements AuthorRepository {
     private final AuthorJpaRepository authorJpaRepository;
 
     @Override
+    public boolean isAuthorExists(Long id) {
+        return authorJpaRepository.existsById(id);
+    }
+
+    @Override
     public List<Author> findAll() {
         return (List<Author>) this.authorJpaRepository.findAll();
     }

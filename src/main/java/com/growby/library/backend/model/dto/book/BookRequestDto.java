@@ -1,7 +1,6 @@
 package com.growby.library.backend.model.dto.book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.growby.library.backend.model.entity.Author;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

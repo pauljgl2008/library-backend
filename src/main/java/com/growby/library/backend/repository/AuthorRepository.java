@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AuthorRepository {
+    boolean isAuthorExists(Long id);
+
     List<Author> findAll();
 
     Optional<Author> findById(final Long id);

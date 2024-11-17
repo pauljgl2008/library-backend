@@ -20,11 +20,11 @@ import java.util.stream.Stream;
 public class BookCriteriaBuilder {
 
     private static final String PERCENTAGE_SYMBOL = "%";
-    private static final Set<String> VALID_SORT_FIELDS = Set.of(
-            "id", "author", "isbn", "status", "publicationDate"
-    );
     private static final String ATTRIBUTE_PUBLICATION_DATE = "publicationDate";
     private static final String KEY_PUBLICATION_DATE = "publication_date";
+    private static final Set<String> VALID_SORT_FIELDS = Set.of(
+            "id", "author", "isbn", "status", ATTRIBUTE_PUBLICATION_DATE
+    );
 
     public CriteriaQuery<Book> buildCriteriaQuery(
             CriteriaBuilder criteriaBuilder,

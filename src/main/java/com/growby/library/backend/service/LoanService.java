@@ -8,9 +8,11 @@ import java.util.Optional;
 
 public interface LoanService {
 
-    Optional<LoanResponseDto> getLoanById(Long bookId);
+    boolean isLoanExistsAndCompleted(Long id);
 
-    List<LoanResponseDto> getLoans();
+    List<LoanResponseDto> getAllLoans();
+
+    Optional<LoanResponseDto> getLoanById(Long id);
 
     LoanResponseDto createLoan(LoanRequestDto bookRequestDto);
 
