@@ -7,8 +7,8 @@ import com.growby.library.backend.model.dto.loan.LoanRequestDto;
 import com.growby.library.backend.model.dto.loan.LoanResponseDto;
 import com.growby.library.backend.model.entity.Loan;
 import com.growby.library.backend.model.entity.LoanStatus;
-import com.growby.library.backend.repository.BookJpaRepository;
-import com.growby.library.backend.repository.impl.LoanRepositoryImpl;
+import com.growby.library.backend.repository.book.BookJpaRepository;
+import com.growby.library.backend.repository.loan.impl.LoanRepositoryImpl;
 import com.growby.library.backend.service.LoanService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.growby.library.backend.common.ValidationConstants.PARAM_ID;
+import static com.growby.library.backend.common.ValidationConstants.ID_PARAM;
 
 @RequiredArgsConstructor
 @Service
@@ -58,13 +58,13 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public LoanResponseDto updateLoan(Long id, LoanRequestDto loanRequestDto) {
         Loan loan = this.loanRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, PARAM_ID, id.toString(),
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, ID_PARAM, id.toString(),
                         ValidationConstants.AUTHOR_NOT_FOUND_MESSAGE));
         loan.setId(loanRequestDto.getId());
         loan.setLoanDate(loanRequestDto.getLoanDate());
         loan.setStatus(loanRequestDto.getStatus());
         loan.setBook(this.bookJpaRepository.findById(loanRequestDto.getId())
-                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, PARAM_ID, id.toString(),
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, ID_PARAM, id.toString(),
                         ValidationConstants.LOAN_NOT_FOUND_MESSAGE)));
         loan = this.loanRepository.save(loan);
         return this.loanEntityMapper.toLoanResponseDto(loan);

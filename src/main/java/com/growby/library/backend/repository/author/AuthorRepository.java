@@ -1,4 +1,4 @@
-package com.growby.library.backend.repository;
+package com.growby.library.backend.repository.author;
 
 import com.growby.library.backend.model.entity.Author;
 

@@ -7,7 +7,7 @@ import com.growby.library.backend.mapper.AuthorEntityMapper;
 import com.growby.library.backend.model.dto.author.AuthorRequestDto;
 import com.growby.library.backend.model.dto.author.AuthorResponseDto;
 import com.growby.library.backend.model.entity.Author;
-import com.growby.library.backend.repository.impl.AuthorRepositoryImpl;
+import com.growby.library.backend.repository.author.impl.AuthorRepositoryImpl;
 import com.growby.library.backend.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

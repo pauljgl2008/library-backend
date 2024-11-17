@@ -21,8 +21,7 @@ public interface LoanEntityMapper {
 
     List<LoanResponseDto> loanListToLoanResponseDtoList(List<Loan> source);
 
-    // Custom mapping for Author to String (assuming you want the author's name)
     default String map(Author author) {
-        return author != null ? author.getName() : null;  // Returns the name of the author
+        return author != null ? author.getName() : null;
     }
 }

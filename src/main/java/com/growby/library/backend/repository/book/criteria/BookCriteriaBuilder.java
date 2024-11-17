@@ -1,4 +1,4 @@
-package com.growby.library.backend.repository;
+package com.growby.library.backend.repository.book.criteria;
 
 import com.growby.library.backend.common.ValidationConstants;
 import com.growby.library.backend.exception.InvalidFieldException;
@@ -36,12 +36,12 @@ public class BookCriteriaBuilder {
         var root = criteriaQuery.from(Book.class);
         criteriaQuery.select(root);
 
-        var predicates = buildPredicates(criteriaBuilder, root, title, author);
+        var predicates = this.buildPredicates(criteriaBuilder, root, title, author);
         if (!predicates.isEmpty()) {
             criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
         }
 
-        addSorting(criteriaBuilder, pageable, root, criteriaQuery);
+        this.addSorting(criteriaBuilder, pageable, root, criteriaQuery);
 
         return criteriaQuery;
     }
@@ -55,7 +55,7 @@ public class BookCriteriaBuilder {
         var countRoot = countQuery.from(Book.class);
         countQuery.select(criteriaBuilder.count(countRoot));
 
-        var predicates = buildPredicates(criteriaBuilder, countRoot, title, author);
+        var predicates = this.buildPredicates(criteriaBuilder, countRoot, title, author);
         if (!predicates.isEmpty()) {
             countQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
         }

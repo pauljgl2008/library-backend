@@ -1,8 +1,8 @@
-package com.growby.library.backend.repository.impl;
+package com.growby.library.backend.repository.loan.impl;
 
 import com.growby.library.backend.model.entity.Loan;
-import com.growby.library.backend.repository.LoanJpaRepository;
-import com.growby.library.backend.repository.LoanRepository;
+import com.growby.library.backend.repository.loan.LoanJpaRepository;
+import com.growby.library.backend.repository.loan.LoanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +36,6 @@ public class LoanRepositoryImpl implements LoanRepository {
 
     @Override
     public boolean isLoanExistsAndCompleted(Long id, String status) {
-        return loanJpaRepository.existsByIdAndCompleted(id, status);
+        return this.loanJpaRepository.existsByIdAndStatus(id, status);
     }
 }

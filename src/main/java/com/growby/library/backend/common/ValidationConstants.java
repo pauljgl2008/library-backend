@@ -31,5 +31,5 @@ public class ValidationConstants {
 
     public static final String LOAN_STATUS_FIELD = "estado del préstamo";
     public static final String INVALID_LOAN_STATUS_MESSAGE = "El estado del préstamo solo puede ser 'Activo' o 'Finalizado'.";
-    public static final String PARAM_ID = "id";
+    public static final String ID_PARAM = "id";
 }

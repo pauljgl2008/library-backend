@@ -1,8 +1,8 @@
-package com.growby.library.backend.repository;
+package com.growby.library.backend.repository.loan;
 
 import com.growby.library.backend.model.entity.Loan;
 import org.springframework.data.repository.CrudRepository;
 
 public interface LoanJpaRepository extends CrudRepository<Loan, Long> {
-    boolean existsByIdAndCompleted(Long id, String status);
+    boolean existsByIdAndStatus(Long id, String status);
 }

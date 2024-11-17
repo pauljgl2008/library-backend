@@ -1,8 +1,8 @@
-package com.growby.library.backend.repository.impl;
+package com.growby.library.backend.repository.author.impl;
 
 import com.growby.library.backend.model.entity.Author;
-import com.growby.library.backend.repository.AuthorJpaRepository;
-import com.growby.library.backend.repository.AuthorRepository;
+import com.growby.library.backend.repository.author.AuthorJpaRepository;
+import com.growby.library.backend.repository.author.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 
     @Override
     public boolean isAuthorExists(Long id) {
-        return authorJpaRepository.existsById(id);
+        return this.authorJpaRepository.existsById(id);
     }
 
     @Override

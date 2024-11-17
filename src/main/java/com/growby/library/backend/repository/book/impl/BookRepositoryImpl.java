@@ -1,10 +1,10 @@
-package com.growby.library.backend.repository.impl;
+package com.growby.library.backend.repository.book.impl;
 
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.model.entity.BookStatus;
-import com.growby.library.backend.repository.BookCriteriaBuilder;
-import com.growby.library.backend.repository.BookJpaRepository;
-import com.growby.library.backend.repository.BookRepository;
+import com.growby.library.backend.repository.book.criteria.BookCriteriaBuilder;
+import com.growby.library.backend.repository.book.BookJpaRepository;
+import com.growby.library.backend.repository.book.BookRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -31,23 +31,24 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public boolean isBookAvailable(Long id) {
-        return bookJpaRepository.existsByIdAndStatus(id, BookStatus.AVAILABLE.getValue());
+        return this.bookJpaRepository.existsByIdAndStatus(id, BookStatus.AVAILABLE.getValue());
     }
 
     @Override
     public Page<Book> findAllWithPagination(Pageable pageable, String title, String author) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = this.entityManager.getCriteriaBuilder();
 
-        CriteriaQuery<Book> criteriaQuery = bookCriteriaBuilder.buildCriteriaQuery(criteriaBuilder, pageable, title, author);
-        TypedQuery<Book> query = entityManager.createQuery(criteriaQuery);
+        CriteriaQuery<Book> criteriaQuery = this.bookCriteriaBuilder.buildCriteriaQuery(
+                criteriaBuilder, pageable, title, author);
+        TypedQuery<Book> query = this.entityManager.createQuery(criteriaQuery);
 
         query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
         query.setMaxResults(pageable.getPageSize());
 
         List<Book> books = query.getResultList();
 
-        CriteriaQuery<Long> countQuery = bookCriteriaBuilder.buildCountQuery(criteriaBuilder, title, author);
-        TypedQuery<Long> countTypedQuery = entityManager.createQuery(countQuery);
+        CriteriaQuery<Long> countQuery = this.bookCriteriaBuilder.buildCountQuery(criteriaBuilder, title, author);
+        TypedQuery<Long> countTypedQuery = this.entityManager.createQuery(countQuery);
         Long count = countTypedQuery.getSingleResult();
 
         return new PageImpl<>(books, pageable, count);

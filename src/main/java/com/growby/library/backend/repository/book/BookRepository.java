@@ -1,4 +1,4 @@
-package com.growby.library.backend.repository;
+package com.growby.library.backend.repository.book;
 
 import com.growby.library.backend.model.entity.Book;
 import org.springframework.data.domain.Page;

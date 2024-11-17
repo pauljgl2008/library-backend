@@ -1,4 +1,4 @@
-package com.growby.library.backend.repository;
+package com.growby.library.backend.repository.loan;
 
 import com.growby.library.backend.model.entity.Loan;
 
