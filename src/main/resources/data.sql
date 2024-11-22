@@ -35,10 +35,49 @@ INSERT INTO AUTHOR (NAME, NATIONALITY, BIRTH_DATE)
 VALUES ('George Orwell', 'British', '1903-06-25');
 
 -- Data for Book Table
+-- 1. Harry Potter and the Sorcerer's Stone
 INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
-VALUES ('Harry Potter and the Sorcerer Stone', 1, '978-0439708180', '1997-06-26', 'Disponible');
+VALUES ('Harry Potter and the Sorcerers Stone', 1, '978-0439708180', '1997-06-26', 'Disponible');
+
+-- 2. 1984
 INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
-VALUES ('Book 1984', 2, '978-0451524935', '1949-06-08', 'No disponible');
+VALUES ('1984', 2, '978-0451524935', '1949-06-08', 'No disponible');
+
+-- 3. Harry Potter and the Chamber of Secrets
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Harry Potter and the Chamber of Secrets', 1, '978-0439064873', '1998-07-02', 'Disponible');
+
+-- 4. Animal Farm
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Animal Farm', 2, '978-0451526342', '1945-08-17', 'No disponible');
+
+-- 5. Harry Potter and the Prisoner of Azkaban
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Harry Potter and the Prisoner of Azkaban', 1, '978-0439136358', '1999-07-08', 'Disponible');
+
+-- 6. Homage to Catalonia
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Homage to Catalonia', 2, '978-0156421171', '1938-04-20', 'No disponible');
+
+-- 7. Harry Potter and the Goblet of Fire
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Harry Potter and the Goblet of Fire', 1, '978-0439139601', '2000-07-08', 'Disponible');
+
+-- 8. Down and Out in Paris and London
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Down and Out in Paris and London', 2, '978-0156262248', '1933-01-01', 'No disponible');
+
+-- 9. Harry Potter and the Order of the Phoenix
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Harry Potter and the Order of the Phoenix', 1, '978-0439358071', '2003-06-21', 'Disponible');
+
+-- 10. The Road to Wigan Pier
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('The Road to Wigan Pier', 2, '978-0156767505', '1937-03-01', 'No disponible');
+
+-- 11. Harry Potter and the Half-Blood Prince
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('Harry Potter and the Half-Blood Prince', 1, '978-0439785969', '2005-07-16', 'Disponible');
 
 -- Data for Loan Table
 INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)

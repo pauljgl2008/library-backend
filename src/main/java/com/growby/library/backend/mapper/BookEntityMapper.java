@@ -18,7 +18,6 @@ public interface BookEntityMapper {
 
     List<BookResponseDto> bookListToBookResponseDtoList(List<Book> source);
 
-    @Mapping(source = "author.name", target = "author")
     BookResponseDto toBookResponseDto(Book source);
 
     @Mapping(source = "author", target = "author.id")
