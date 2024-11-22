@@ -20,7 +20,7 @@ public class BookResponseDto implements Serializable {
 
     private String title;
 
-    private AuthorResponseDto author;
+    private Long author;
 
     private String isbn;
 
