@@ -19,5 +19,5 @@ public class LoanRequestDto {
     private String status;
 
     @JsonProperty("book_id")
-    private String bookId;
+    private Long bookId;
 }

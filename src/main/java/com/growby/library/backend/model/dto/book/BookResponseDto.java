@@ -19,7 +19,8 @@ public class BookResponseDto implements Serializable {
 
     private String title;
 
-    private Long author;
+    @JsonProperty("author_id")
+    private Long authorId;
 
     private String isbn;
 

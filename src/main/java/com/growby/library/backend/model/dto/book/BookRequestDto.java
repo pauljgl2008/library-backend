@@ -22,7 +22,8 @@ public class BookRequestDto implements Serializable {
 
     private String title;
 
-    private Long author;
+    @JsonProperty("author_id")
+    private Long authorId;
 
     @NotBlank(message = BOOK_ISBN_REQUIRED_MESSAGE)
     private String isbn;

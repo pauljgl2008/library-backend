@@ -2,7 +2,7 @@ package com.growby.library.backend.service.impl;
 
 import com.growby.library.backend.common.ValidationConstants;
 import com.growby.library.backend.exception.BookNotFoundException;
-import com.growby.library.backend.mapper.LoanEntityMapperImpl;
+import com.growby.library.backend.mapper.LoanEntityMapper;
 import com.growby.library.backend.model.dto.loan.LoanRequestDto;
 import com.growby.library.backend.model.dto.loan.LoanResponseDto;
 import com.growby.library.backend.model.entity.Loan;
@@ -27,7 +27,7 @@ import static com.growby.library.backend.common.ValidationConstants.ID_PARAM;
 @Transactional
 public class LoanServiceImpl implements LoanService {
 
-    private final LoanEntityMapperImpl loanEntityMapper;
+    private final LoanEntityMapper loanEntityMapper;
     private final LoanRepositoryImpl loanRepository;
     private final BookJpaRepository bookJpaRepository;
 

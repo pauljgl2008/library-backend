@@ -1,6 +1,6 @@
 package com.growby.library.backend.model.dto.loan;
 
-import com.growby.library.backend.model.dto.book.BookResponseDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -10,11 +10,14 @@ public class LoanResponseDto {
 
     private Long id;
 
+    @JsonProperty("loan_date")
     private LocalDate loanDate;
 
+    @JsonProperty("return_date")
     private LocalDate returnDate;
 
     private String status;
 
-    private BookResponseDto book;
+    @JsonProperty("book_id")
+    private Long bookId;
 }

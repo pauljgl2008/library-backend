@@ -66,9 +66,9 @@ public class BookServiceImpl implements BookService {
 
         book.setTitle(bookRequestDto.getTitle());
         book.setIsbn(bookRequestDto.getIsbn());
-        book.setAuthor(this.authorJpaRepository.findById(bookRequestDto.getAuthor())
+        book.setAuthor(this.authorJpaRepository.findById(bookRequestDto.getAuthorId())
                 .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "id",
-                        bookRequestDto.getAuthor().toString(), ValidationConstants.BOOK_NOT_FOUND_MESSAGE)));
+                        bookRequestDto.getAuthorId().toString(), ValidationConstants.BOOK_NOT_FOUND_MESSAGE)));
         book.setPublicationDate(bookRequestDto.getPublicationDate());
         book.setStatus(bookRequestDto.getStatus());
 
