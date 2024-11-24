@@ -63,7 +63,7 @@ public class LoanServiceImpl implements LoanService {
         loan.setId(loanRequestDto.getId());
         loan.setLoanDate(loanRequestDto.getLoanDate());
         loan.setStatus(loanRequestDto.getStatus());
-        loan.setBook(this.bookJpaRepository.findById(loanRequestDto.getId())
+        loan.setBook(this.bookJpaRepository.findById(loanRequestDto.getBookId())
                 .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, ID_PARAM, id.toString(),
                         ValidationConstants.LOAN_NOT_FOUND_MESSAGE)));
         loan = this.loanRepository.save(loan);
