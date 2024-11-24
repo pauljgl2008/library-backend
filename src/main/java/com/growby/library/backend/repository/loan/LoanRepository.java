@@ -1,5 +1,6 @@
 package com.growby.library.backend.repository.loan;
 
+import com.growby.library.backend.model.dto.loan.LoanResponseDto;
 import com.growby.library.backend.model.entity.Loan;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface LoanRepository {
     void deleteById(final Long id);
 
     boolean isLoanExistsAndCompleted(Long id, String status);
+
+    List<Loan> findByBookId(Long bookId);
 }

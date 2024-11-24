@@ -1,5 +1,6 @@
 package com.growby.library.backend.repository.loan.impl;
 
+import com.growby.library.backend.model.dto.loan.LoanResponseDto;
 import com.growby.library.backend.model.entity.Loan;
 import com.growby.library.backend.repository.loan.LoanJpaRepository;
 import com.growby.library.backend.repository.loan.LoanRepository;
@@ -37,5 +38,10 @@ public class LoanRepositoryImpl implements LoanRepository {
     @Override
     public boolean isLoanExistsAndCompleted(Long id, String status) {
         return this.loanJpaRepository.existsByIdAndStatus(id, status);
+    }
+
+    @Override
+    public List<Loan> findByBookId(Long bookId) {
+        return this.loanJpaRepository.findByBookId(bookId);
     }
 }

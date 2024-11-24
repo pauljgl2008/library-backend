@@ -33,6 +33,12 @@ public class LoanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authorCreated);
     }
 
+    @GetMapping("/book/{bookId}")
+    public ResponseEntity<List<LoanResponseDto>> getLoansByBook(@PathVariable Long bookId) {
+        List<LoanResponseDto> loans = loanService.findLoansByBook(bookId);
+        return ResponseEntity.ok(loans);
+    }
+
     @GetMapping("/{id}/availability")
     public ResponseEntity<String> checkLoanAvailability(@PathVariable Long id) {
         boolean isAvailable = this.loanService.isLoanExistsAndCompleted(id);

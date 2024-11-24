@@ -74,4 +74,10 @@ public class LoanServiceImpl implements LoanService {
     public void deleteLoanById(Long id) {
         this.loanRepository.deleteById(id);
     }
+
+    @Override
+    public List<LoanResponseDto> findLoansByBook(Long bookId) {
+        List<Loan> loans =  loanRepository.findByBookId(bookId);
+        return this.loanEntityMapper.loanListToLoanResponseDtoList(loans);
+    }
 }

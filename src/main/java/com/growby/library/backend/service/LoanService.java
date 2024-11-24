@@ -19,5 +19,7 @@ public interface LoanService {
     LoanResponseDto updateLoan(Long id, LoanRequestDto bookRequestDto);
 
     void deleteLoanById(Long id);
+
+    List<LoanResponseDto> findLoansByBook(Long bookId);
 }
 
