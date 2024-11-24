@@ -31,8 +31,15 @@ CREATE TABLE LOAN (
 -- Data for Author Table
 INSERT INTO AUTHOR (NAME, NATIONALITY, BIRTH_DATE)
 VALUES ('J.K. Rowling', 'British', '1965-07-31');
+
 INSERT INTO AUTHOR (NAME, NATIONALITY, BIRTH_DATE)
 VALUES ('George Orwell', 'British', '1903-06-25');
+
+INSERT INTO AUTHOR (NAME, NATIONALITY, BIRTH_DATE)
+VALUES ('J.R.R. Tolkien', 'British', '1892-01-03');
+
+INSERT INTO AUTHOR (NAME, NATIONALITY, BIRTH_DATE)
+VALUES ('Leo Tolstoy', 'Russian', '1828-09-09');
 
 -- Data for Book Table
 -- 1. Harry Potter and the Sorcerer's Stone
@@ -79,8 +86,40 @@ VALUES ('The Road to Wigan Pier', 2, '978-0156767505', '1937-03-01', 'No disponi
 INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
 VALUES ('Harry Potter and the Half-Blood Prince', 1, '978-0439785969', '2005-07-16', 'Disponible');
 
+-- 12. The Lord of the Rings: The Fellowship of the Ring
+INSERT INTO BOOK (TITLE, AUTHOR_ID, ISBN, PUBLICATION_DATE, STATUS)
+VALUES ('The Lord of the Rings: The Fellowship of the Ring', 3, '978-0618574940', '1954-07-29', 'Disponible');
+
 -- Data for Loan Table
+-- 1. Loan for Harry Potter and the Sorcerer's Stone
 INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
-VALUES ('2024-11-01', '2024-12-15', 'Activo', 1);
+VALUES ('2024-11-01', '2024-12-15', 'Finalizado', 1);
+
+-- 2. Loan for 1984
 INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
-VALUES ('2024-11-05', '2024-12-20', 'Finalizado', 2);
+VALUES ('2024-11-05', '2024-12-20', 'Activo', 2);
+
+-- 3. Loan for Harry Potter and the Chamber of Secrets
+INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
+VALUES ('2024-11-10', '2024-12-10', 'Finalizado', 3);
+
+-- 4. Loan for Animal Farm
+INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
+VALUES ('2024-11-12', '2024-11-26', 'Finalizado', 4);
+
+-- 5. Loan for Harry Potter and the Prisoner of Azkaban
+INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
+VALUES ('2024-11-15', '2024-12-15', 'Finalizado', 5);
+
+-- 6. Loan for Homage to Catalonia
+INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
+VALUES ('2024-11-17', '2024-12-01', 'Finalizado', 6);
+
+-- 7. Loan for Harry Potter and the Goblet of Fire
+INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
+VALUES ('2024-11-20', '2024-12-10', 'Finalizado', 7);
+
+-- 8. Loan for The Lord of the Rings: The Fellowship of the Ring
+INSERT INTO LOAN (LOAN_DATE, RETURN_DATE, STATUS, BOOK_ID)
+VALUES ('2024-11-22', '2024-12-22', 'Activo', 12);
+

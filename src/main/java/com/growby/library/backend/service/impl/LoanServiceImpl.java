@@ -5,6 +5,8 @@ import com.growby.library.backend.exception.BookNotFoundException;
 import com.growby.library.backend.mapper.LoanEntityMapper;
 import com.growby.library.backend.model.dto.loan.LoanRequestDto;
 import com.growby.library.backend.model.dto.loan.LoanResponseDto;
+import com.growby.library.backend.model.entity.Book;
+import com.growby.library.backend.model.entity.BookStatus;
 import com.growby.library.backend.model.entity.Loan;
 import com.growby.library.backend.model.entity.LoanStatus;
 import com.growby.library.backend.repository.book.BookJpaRepository;
@@ -63,9 +65,14 @@ public class LoanServiceImpl implements LoanService {
         loan.setId(loanRequestDto.getId());
         loan.setLoanDate(loanRequestDto.getLoanDate());
         loan.setStatus(loanRequestDto.getStatus());
-        loan.setBook(this.bookJpaRepository.findById(loanRequestDto.getBookId())
+        Book book = this.bookJpaRepository.findById(loanRequestDto.getBookId())
                 .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, ID_PARAM, id.toString(),
-                        ValidationConstants.LOAN_NOT_FOUND_MESSAGE)));
+                        ValidationConstants.LOAN_NOT_FOUND_MESSAGE));
+        if(LoanStatus.COMPLETED.getValue().equals(loan.getStatus())){
+            book.setStatus(BookStatus.AVAILABLE.getValue());
+        }
+        book = this.bookJpaRepository.save(book);
+        loan.setBook(book);
         loan = this.loanRepository.save(loan);
         return this.loanEntityMapper.toLoanResponseDto(loan);
     }
