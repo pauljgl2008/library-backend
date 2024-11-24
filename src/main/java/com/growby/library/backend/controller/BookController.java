@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.growby.library.backend.common.ValidationConstants.BOOK_STATUS_AVAILABLE_MESSAGE;
 import static com.growby.library.backend.common.ValidationConstants.BOOK_STATUS_NOT_AVAILABLE_MESSAGE;
 
@@ -26,6 +28,12 @@ public class BookController {
                                                                         @RequestParam(required = false) String title,
                                                                         @RequestParam(required = false) String author) {
         Page<BookResponseDto> books = this.bookService.getBooksWithPagination(pageable, title, author);
+        return ResponseEntity.ok(books);
+    }
+
+    @GetMapping("getAll")
+    public ResponseEntity<List<BookResponseDto>> getBooks() {
+        List<BookResponseDto> books = this.bookService.getBooks();
         return ResponseEntity.ok(books);
     }
 

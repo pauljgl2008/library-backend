@@ -77,6 +77,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookResponseDto> getBooks() {
+        List<Book> books = this.bookRepository.findAll();
+        return this.bookEntityMapper.bookListToBookResponseDtoList(books);
+    }
+
+    @Override
     public Optional<BookResponseDto> getBookById(Long bookId) {
         Optional<Book> book = this.bookRepository.findById(bookId);
         return book.map(this.bookEntityMapper::toBookResponseDto);

@@ -2,9 +2,9 @@ package com.growby.library.backend.repository.book.impl;
 
 import com.growby.library.backend.model.entity.Book;
 import com.growby.library.backend.model.entity.BookStatus;
-import com.growby.library.backend.repository.book.criteria.BookCriteriaBuilder;
 import com.growby.library.backend.repository.book.BookJpaRepository;
 import com.growby.library.backend.repository.book.BookRepository;
+import com.growby.library.backend.repository.book.criteria.BookCriteriaBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -28,6 +28,10 @@ public class BookRepositoryImpl implements BookRepository {
     private EntityManager entityManager;
 
     private final BookCriteriaBuilder bookCriteriaBuilder;
+
+    public List<Book> findAll() {
+        return (List<Book>) this.bookJpaRepository.findAll();
+    }
 
     @Override
     public boolean isBookAvailable(Long id) {

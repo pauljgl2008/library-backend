@@ -4,9 +4,12 @@ import com.growby.library.backend.model.entity.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository {
+    List<Book> findAll();
+
     boolean isBookAvailable(Long bookId);
 
     Page<Book> findAllWithPagination(Pageable pageable, String title, String author);

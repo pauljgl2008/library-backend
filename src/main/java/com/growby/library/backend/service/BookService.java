@@ -5,10 +5,12 @@ import com.growby.library.backend.model.dto.book.BookResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
 
+    List<BookResponseDto> getBooks();
     Optional<BookResponseDto> getBookById(Long bookId);
 
     Page<BookResponseDto> getBooksWithPagination(Pageable pageable, String title, String author);
