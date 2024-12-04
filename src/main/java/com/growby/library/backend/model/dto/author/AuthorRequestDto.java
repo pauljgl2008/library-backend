@@ -15,6 +15,6 @@ public class AuthorRequestDto {
     private String nationality;
 
     @JsonProperty("birth_date")
-    private LocalDate birthDate;
+    private String birthDate;
 }
 

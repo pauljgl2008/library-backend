@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,7 +64,7 @@ public class AuthorServiceImpl implements AuthorService {
                         ValidationConstants.AUTHOR_NOT_FOUND_MESSAGE));
         author.setId(authorRequestDto.getId());
         author.setName(authorRequestDto.getName());
-        author.setBirthDate(authorRequestDto.getBirthDate());
+        author.setBirthDate(LocalDate.parse(authorRequestDto.getBirthDate()));
         author.setNationality(authorRequestDto.getNationality());
         author = this.authorRepository.save(author);
         return this.authorEntityMapper.toAuthorResponseDto(author);

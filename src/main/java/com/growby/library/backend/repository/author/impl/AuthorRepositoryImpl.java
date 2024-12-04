@@ -5,6 +5,7 @@ import com.growby.library.backend.repository.author.AuthorJpaRepository;
 import com.growby.library.backend.repository.author.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

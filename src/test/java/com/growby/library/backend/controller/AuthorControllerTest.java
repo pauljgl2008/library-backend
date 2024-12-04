@@ -1,6 +1,7 @@
 package com.growby.library.backend.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.growby.library.backend.model.dto.author.AuthorRequestDto;
 import com.growby.library.backend.model.dto.author.AuthorResponseDto;
 import com.growby.library.backend.service.AuthorService;
 import com.growby.library.backend.util.TestUtil;
@@ -19,6 +20,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,10 +36,22 @@ public class AuthorControllerTest {
 
     private static List<AuthorResponseDto> getAuthorsResponse;
 
-    private static final String GET_AUTHORS_RESPONSE_JSON_PATH =  "src/test/resources/GetAuthorsResponse.json";
+    private static AuthorRequestDto authorRequestDto;
+
+    private static AuthorResponseDto authorResponseDto;
+
+    private static final String AUTHOR_REQUEST_JSON_PATH = "src/test/resources/AuthorRequest.json";
+
+    private static final String AUTHOR_RESPONSE_JSON_PATH = "src/test/resources/AuthorResponse.json";
+
+    private static final String GET_AUTHORS_RESPONSE_JSON_PATH = "src/test/resources/GetAuthorsResponse.json";
+
+    public static final String EXPECTED_NAME = "Paúl";
 
     @BeforeAll
     public static void setUp() throws IOException {
+        authorRequestDto = TestUtil.convertJsonToDto(AUTHOR_REQUEST_JSON_PATH, AuthorRequestDto.class);
+        authorResponseDto = TestUtil.convertJsonToDto(AUTHOR_RESPONSE_JSON_PATH, AuthorResponseDto.class);
         getAuthorsResponse = TestUtil.convertJsonToDto(GET_AUTHORS_RESPONSE_JSON_PATH, new TypeReference<>() {
         });
     }
@@ -54,4 +68,16 @@ public class AuthorControllerTest {
         verify(this.authorService).getAllAuthors();
     }
 
+    @Test
+    @DisplayName("Create Author Success")
+    void given_validAuthorRequest_when_createAuthorCalled_then_returnsCreatedAndAuthor() {
+        when(this.authorService.createAuthor(authorRequestDto)).thenReturn(authorResponseDto);
+
+        final var result = AuthorControllerTest.this.authorController.createAuthor(authorRequestDto);
+
+        assertEquals(HttpStatus.CREATED, result.getStatusCode());
+        assertNotNull(Objects.requireNonNull(result.getBody()).getId());
+        assertEquals(EXPECTED_NAME, result.getBody().getName());
+        verify(this.authorService).createAuthor(any(AuthorRequestDto.class));
+    }
 }
